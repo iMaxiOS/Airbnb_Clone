@@ -23,10 +23,15 @@ struct ExploreView: View {
                     
                     LazyVStack(spacing: 32) {
                         ForEach(0...10, id: \.self) { item in
-                            ListingItemView()
+                            NavigationLink(value: item) {
+                                ListingItemView()                                
+                            }
                         }
                     }
                     .padding()
+                    .navigationDestination(for: Int.self) { item in
+                        ListingDetailView()
+                    }
                 }
             }
         }

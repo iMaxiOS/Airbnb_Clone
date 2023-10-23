@@ -19,6 +19,7 @@
 		CA4E53F42AE25C9100693CD1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA4E53F32AE25C9100693CD1 /* Preview Assets.xcassets */; };
 		CAA5948C2AE64F880071999B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5948B2AE64F880071999B /* ProfileView.swift */; };
 		CAA5948E2AE651DD0071999B /* ProfileOptionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5948D2AE651DD0071999B /* ProfileOptionRowView.swift */; };
+		CAA594902AE65BC40071999B /* WishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5948F2AE65BC40071999B /* WishlistView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		CA4E53F32AE25C9100693CD1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CAA5948B2AE64F880071999B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CAA5948D2AE651DD0071999B /* ProfileOptionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOptionRowView.swift; sourceTree = "<group>"; };
+		CAA5948F2AE65BC40071999B /* WishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 		CA340F6B2AE3B23A00F2F25E /* WIshlists */ = {
 			isa = PBXGroup;
 			children = (
+				CAA5948F2AE65BC40071999B /* WishlistView.swift */,
 			);
 			path = WIshlists;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				CA4E53ED2AE25C8F00693CD1 /* Airbnb_CloneApp.swift in Sources */,
 				CA340F722AE3B60B00F2F25E /* ListingItemView.swift in Sources */,
 				CA340F742AE3CCE700F2F25E /* SearchAndFilterBar.swift in Sources */,
+				CAA594902AE65BC40071999B /* WishlistView.swift in Sources */,
 				CA340F782AE3D15B00F2F25E /* DestinationSearchView.swift in Sources */,
 				CA340F7A2AE3E2CD00F2F25E /* ListingDetailView.swift in Sources */,
 				CA340F7D2AE3E42600F2F25E /* ListingImageCarouselView.swift in Sources */,

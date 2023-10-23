@@ -235,6 +235,8 @@ struct ListingDetailView: View {
         }
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()
+        .statusBarHidden(true)
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 

@@ -45,6 +45,7 @@ struct SearchAndFilterView: View {
             Spacer()
         }
         .padding(.horizontal)
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 

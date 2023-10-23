@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ListingResponse: Identifiable, Codable {
+struct ListingResponse: Identifiable, Codable, Hashable {
     let id: String
     let images: [String]
     let ownerUid: String

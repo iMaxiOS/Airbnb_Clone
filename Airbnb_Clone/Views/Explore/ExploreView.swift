@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ExploreView: View {
+    
+    @StateObject private var vm = ExploreviewModel(manager: ExploreNetworkManager())
+    
+    
     @State private var searchAndFilterToggle = false
     
     var body: some View {
@@ -24,15 +28,15 @@ struct ExploreView: View {
                         }
                     
                     LazyVStack(spacing: 32) {
-                        ForEach(0...10, id: \.self) { item in
+                        ForEach(vm.listings) { item in
                             NavigationLink(value: item) {
-                                ListingItemView()                                
+                                ListingItemView(item: item)
                             }
                         }
                     }
                     .padding()
-                    .navigationDestination(for: Int.self) { item in
-                        ListingDetailView()
+                    .navigationDestination(for: ListingResponse.self) { item in
+                        ListingDetailView(item: item)
                     }
                 }
             }

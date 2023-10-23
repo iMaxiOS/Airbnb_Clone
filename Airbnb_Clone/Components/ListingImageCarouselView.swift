@@ -10,16 +10,16 @@ import SwiftUI
 struct ListingImageCarouselView: View {
     
     var isHiddenLike: Bool
+    let item: ListingResponse
     
-    init(isHiddenLike: Bool) {
+    init(isHiddenLike: Bool, item: ListingResponse) {
         self.isHiddenLike = isHiddenLike
+        self.item = item
     }
-    
-    private let images = ["crypto1", "sports2", "movies2"]
     
     var body: some View {
         TabView {
-            ForEach(images, id: \.self) { photo in
+            ForEach(item.images, id: \.self) { photo in
                 Image(photo)
                     .resizable()
                     .clipped()
@@ -43,5 +43,5 @@ struct ListingImageCarouselView: View {
 }
 
 #Preview {
-    ListingImageCarouselView(isHiddenLike: true)
+    ListingImageCarouselView(isHiddenLike: true, item: DeveloperPreview.instance.listings[2])
 }

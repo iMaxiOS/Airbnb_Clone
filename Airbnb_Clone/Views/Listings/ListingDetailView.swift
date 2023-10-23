@@ -11,11 +11,26 @@ import MapKit
 struct ListingDetailView: View {
     
     @Environment(\.dismiss) var dissmis
+    @State private var cameraPosition: MapCameraPosition
+    
+    let item: ListingResponse
+    
+    init(item: ListingResponse) {
+        self.item = item
+        
+        let center = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
+        let region = MKCoordinateRegion(
+            center: center,
+            span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        )
+        
+        self._cameraPosition = State(wrappedValue: .region(region))
+    }
     
     var body: some View {
         ScrollView {
             ZStack(alignment: .topLeading) {
-                ListingImageCarouselView(isHiddenLike: true)
+                ListingImageCarouselView(isHiddenLike: true, item: item)
                     .frame(height: 320)
                 
                 Button {
@@ -33,8 +48,8 @@ struct ListingDetailView: View {
             }
             
             VStack(alignment: .leading) {
-                VStack {
-                    Text("Miami, Villa")
+                VStack(alignment: .leading) {
+                    Text(item.title)
                         .font(.title)
                         .fontWeight(.semibold)
                     
@@ -42,7 +57,7 @@ struct ListingDetailView: View {
                         HStack(spacing: 2) {
                             Image(systemName: "star.fill")
                                 .font(.subheadline)
-                            Text("4.85")
+                            Text(item.rating.description)
                                 .fontWeight(.medium)
                             Text(" - ")
                             Text("28 reviews")
@@ -50,7 +65,7 @@ struct ListingDetailView: View {
                                 .fontWeight(.semibold)
                         }
                         
-                        Text("Miami, Florida")
+                        Text("\(item.title) \(item.state)")
                     }
                     .font(.caption)
                 }
@@ -60,17 +75,17 @@ struct ListingDetailView: View {
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Entire villa hosted by \nJohn Smith")
+                        Text("Entire \(item.type.description) hosted by \n\(item.ownerName)")
                             .font(.headline)
                             .fontWeight(.semibold)
                         
-                        Text("4 guests - 4 bedrooms - 4 beds, 3 baths")
+                        Text("\(item.numberOfGuests) guests - \(item.numberOfBedRooms) bedrooms - \(item.numberOfBeds) beds, \(item.numberOfBathrooms) baths")
                     }
                     .font(.caption)
                     
                     Spacer()
                     
-                    Image(.crypto1)
+                    Image(item.ownerImageUrl)
                         .resizable()
                         .scaledToFill()
                         .clipShape(Circle())
@@ -81,29 +96,18 @@ struct ListingDetailView: View {
                 Divider()
                 
                 VStack(alignment: .leading, spacing: 16) {
-                    HStack {
-                        Image(systemName: "doc.append.fill")
-                            .font(.title3)
-                        VStack(alignment: .leading) {
-                            Text("Self check-in")
-                                .font(.caption)
-                                .fontWeight(.semibold)
-                            
-                            Text("Check yourself in with the keyboard")
-                                .foregroundStyle(.gray)
-                        }
-                    }
-                    
-                    HStack {
-                        Image(systemName: "figure.wave.circle")
-                            .font(.title3)
-                        VStack(alignment: .leading) {
-                            Text("Superhost")
-                                .font(.caption)
-                                .fontWeight(.semibold)
-                            
-                            Text("Superhosts are experiences, highly rates hosts who are commited to providing greate stars for guests")
-                                .foregroundStyle(.gray)
+                    ForEach(item.feature) { item in
+                        HStack {
+                            Image(systemName: item.imageName)
+                                .font(.title3)
+                            VStack(alignment: .leading) {
+                                Text(item.title)
+                                    .font(.caption)
+                                    .fontWeight(.semibold)
+                                
+                                Text(item.subtitle)
+                                    .foregroundStyle(.gray)
+                            }
                         }
                     }
                 }
@@ -119,7 +123,7 @@ struct ListingDetailView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            ForEach(1 ..< 5, id: \.self) { item in
+                            ForEach(1 ..< item.numberOfBeds, id: \.self) { item in
                                 VStack(alignment: .leading, spacing: 8) {
                                     Image(systemName: "bed.double")
                                     Text("Bedroom \(item)")
@@ -145,34 +149,12 @@ struct ListingDetailView: View {
                         .font(.headline)
                         .fontWeight(.semibold)
                     
-                    HStack(spacing: 4) {
-                        Image(systemName: "wifi")
-                            .frame(width: 30)
-                        Text("Wifi")
-                    }
-                    
-                    HStack(spacing: 4) {
-                        Image(systemName: "light.beacon.min.fill")
-                            .frame(width: 30)
-                        Text("Alart system")
-                    }
-                    
-                    HStack(spacing: 4) {
-                        Image(systemName: "building")
-                            .frame(width: 30)
-                        Text("Balcony")
-                    }
-                    
-                    HStack(spacing: 4) {
-                        Image(systemName: "magicmouse")
-                            .frame(width: 30)
-                        Text("Lundry")
-                    }
-                    
-                    HStack(spacing: 4) {
-                        Image(systemName: "tv")
-                            .frame(width: 30)
-                        Text("TV")
+                    ForEach(item.amenities) { item in
+                        HStack(spacing: 4) {
+                            Image(systemName: item.imageName)
+                                .frame(width: 30)
+                            Text(item.title)
+                        }
                     }
                 }
                 .font(.caption)
@@ -185,9 +167,10 @@ struct ListingDetailView: View {
                         .font(.headline)
                         .fontWeight(.semibold)
                     
-                    Map()
+                    Map(position: $cameraPosition)
                         .frame(height: 250)
                         .clipShape(.rect(cornerRadius: 10))
+                        .disabled(true)
                     
                 }
                 .font(.caption)
@@ -199,7 +182,7 @@ struct ListingDetailView: View {
         .overlay(alignment: .bottom) {
             HStack(alignment: .center) {
                 VStack(alignment: .leading) {
-                    Text("$500")
+                    Text("$\(item.pricePerNight)")
                         .font(.headline)
                         .fontWeight(.semibold)
                     Text("Total before taxes")
@@ -241,5 +224,5 @@ struct ListingDetailView: View {
 }
 
 #Preview {
-    ListingDetailView()
+    ListingDetailView(item: DeveloperPreview.instance.listings[2])
 }

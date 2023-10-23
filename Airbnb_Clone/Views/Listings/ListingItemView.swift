@@ -9,22 +9,24 @@ import SwiftUI
 
 struct ListingItemView: View {
     
+    let item: ListingResponse
+    
     var body: some View {
         VStack {
-            ListingImageCarouselView(isHiddenLike: false)
+            ListingImageCarouselView(isHiddenLike: false, item: item)
                 .frame(height: 300)
                 .clipShape(.rect(cornerRadius: 10))
             
             VStack(alignment: .leading) {
                 HStack(spacing: 5) {
-                    Text("Crypto future")
+                    Text("\(item.city), \(item.state)")
                         .bold()
                     
                     Spacer()
                     
                     Image(systemName: "star.fill")
                         .font(.subheadline)
-                    Text("4.85")
+                    Text("\(item.rating)")
                         .fontWeight(.medium)
                 }
                 
@@ -36,7 +38,7 @@ struct ListingItemView: View {
                     .font(.footnote)
                     .foregroundStyle(.gray)
                 
-                Text("$567")
+                Text("$\(item.pricePerNight)")
                     .bold() +
                 Text(" night")
                     .font(.footnote)
@@ -48,5 +50,5 @@ struct ListingItemView: View {
 }
 
 #Preview {
-    ListingItemView()
+    ListingItemView(item: DeveloperPreview.instance.listings[0])
 }

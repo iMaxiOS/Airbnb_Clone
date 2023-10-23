@@ -7,11 +7,13 @@
 
 import Foundation
 
-private class DeveloperPreview {
+final class DeveloperPreview {
+    static let instance = DeveloperPreview()
+    
     var listings: [ListingResponse] = [
         .init(
             id: UUID().uuidString,
-            images: ["crypto1", "crypto2", "crypto3"],
+            images: ["crypto1", "crypto2"],
             ownerUid: UUID().uuidString,
             ownerName: "John Smith",
             ownerImageUrl: "sports1",
@@ -33,7 +35,7 @@ private class DeveloperPreview {
         ),
         .init(
             id: UUID().uuidString,
-            images: ["sports1", "sports2", "sports3"],
+            images: ["sports1", "sports2", "sports3", "sports2"],
             ownerUid: UUID().uuidString,
             ownerName: "Olya Perchik",
             ownerImageUrl: "movies1",
@@ -42,11 +44,11 @@ private class DeveloperPreview {
             numberOfBedRooms: 3,
             numberOfGuests: 3,
             pricePerNight: 600,
-            latitude: 39.7850,
-            longitude: -50.1936,
+            latitude: 23.6850,
+            longitude: 90.3563,
             adress: "345 Bold St",
             city: "Bangladesh",
-            state: "Turky",
+            state: "South Asia",
             title: "Bangladesh Home",
             rating: 5,
             feature: [.selfCheckIn],
@@ -64,8 +66,8 @@ private class DeveloperPreview {
             numberOfBedRooms: 8,
             numberOfGuests: 20,
             pricePerNight: 1400,
-            latitude: 43.7850,
-            longitude: -50.1936,
+            latitude: 50.4500,
+            longitude: 30.523333,
             adress: "Mian Street 555",
             city: "Kiev",
             state: "Ukraine",
@@ -77,7 +79,7 @@ private class DeveloperPreview {
         ),
         .init(
             id: UUID().uuidString,
-            images: ["crypto1", "crypto2", "crypto3"],
+            images: ["crypto1", "crypto3"],
             ownerUid: UUID().uuidString,
             ownerName: "Missy Pussy",
             ownerImageUrl: "sports3",
@@ -86,8 +88,8 @@ private class DeveloperPreview {
             numberOfBedRooms: 2,
             numberOfGuests: 8,
             pricePerNight: 200,
-            latitude: 11.7850,
-            longitude: -30.1936,
+            latitude: 41.8818,
+            longitude: -87.6231,
             adress: "999 Mian St",
             city: "Chicago",
             state: "USA",

@@ -18,7 +18,9 @@ struct ExploreView: View {
                 ScrollView {
                     SearchAndFilterBar()
                         .onTapGesture {
-                            searchAndFilterToggle.toggle()
+                            withAnimation(.snappy) {
+                                searchAndFilterToggle.toggle()
+                            }
                         }
                     
                     LazyVStack(spacing: 32) {

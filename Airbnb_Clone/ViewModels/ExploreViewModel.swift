@@ -9,8 +9,20 @@ import Foundation
 
 final class ExploreviewModel: ObservableObject {
     @Published var listings: [ListingResponse] = []
+    @Published var searchTitle = ""
     
     private let manager: ExploreNetworkManager
+    
+    var searchCity: [ListingResponse] {
+        if !searchTitle.isEmpty {
+            return self.listings.filter {
+                $0.city.lowercased().contains(searchTitle.lowercased()) ||
+                $0.state.lowercased().contains(searchTitle.lowercased())
+            }
+        } else {
+            return self.listings
+        }
+    }
     
     init(manager: ExploreNetworkManager) {
         self.manager = manager

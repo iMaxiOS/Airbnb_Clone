@@ -35,7 +35,7 @@ final class DeveloperPreview {
         ),
         .init(
             id: UUID().uuidString,
-            images: ["sports1", "sports2", "sports3", "sports2"],
+            images: ["sports1", "sports2", "sports3"],
             ownerUid: UUID().uuidString,
             ownerName: "Olya Perchik",
             ownerImageUrl: "movies1",
@@ -79,7 +79,7 @@ final class DeveloperPreview {
         ),
         .init(
             id: UUID().uuidString,
-            images: ["crypto1", "crypto3"],
+            images: ["crypto3", "crypto1"],
             ownerUid: UUID().uuidString,
             ownerName: "Missy Pussy",
             ownerImageUrl: "sports3",

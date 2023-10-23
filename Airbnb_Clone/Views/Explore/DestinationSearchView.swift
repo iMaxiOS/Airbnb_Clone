@@ -18,8 +18,8 @@ struct DestinationSearchView: View {
     @State private var toDate = Date()
     @State private var selectedType: DestinationLocationType = .location
     
-    @Binding var textSearch: String
-    @Binding var show: Bool
+    @Binding var searchTitle: String
+    @Binding var dismiss: Bool
     
     var body: some View {
         VStack(spacing: 32) {
@@ -33,7 +33,11 @@ struct DestinationSearchView: View {
                         HStack {
                             Image(systemName: "magnifyingglass")
                                 .imageScale(.small)
-                            TextField("Search destinations...", text: $textSearch)
+                            TextField("Search destinations...", text: $searchTitle)
+                                .colorMultiply(.white)
+                                .onSubmit {
+                                    dismiss.toggle()
+                                }
                         }
                         .padding(.horizontal)
                         .frame(height: 45)
@@ -133,6 +137,7 @@ struct CollupsedPickerView: View {
                 Spacer()
                 
                 Text(destination)
+                    .foregroundStyle(Color(.label))
             }
             .fontWeight(.semibold)
             .font(.subheadline)
@@ -145,12 +150,12 @@ struct CollupsedDestinationViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding()
-            .background(Color.white)
+            .background(Color(.systemGray6))
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .shadow(radius: 10)
     }
 }
 
 #Preview {
-    DestinationSearchView(textSearch: .constant(""), show: .constant(false))
+    DestinationSearchView(searchTitle: .constant(""), dismiss: .constant(false))
 }

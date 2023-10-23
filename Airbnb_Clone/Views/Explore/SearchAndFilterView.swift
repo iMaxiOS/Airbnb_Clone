@@ -9,10 +9,9 @@ import SwiftUI
 
 struct SearchAndFilterView: View {
     
-    @State private var showClearButton = false
-    @State private var textSearch = ""
-    
     @Binding var dismiss: Bool
+    @Binding var searchTitle: String
+    
     
     var body: some View {
         VStack(spacing: 16) {
@@ -28,9 +27,9 @@ struct SearchAndFilterView: View {
                 
                 Spacer()
                 
-                if textSearch != "" {
+                if searchTitle != "" {
                     Button(action: {
-                        textSearch = ""
+                        searchTitle = ""
                     }, label: {
                         Text("Clear")
                             .font(.headline)
@@ -40,7 +39,7 @@ struct SearchAndFilterView: View {
             .foregroundColor(.black)
             .padding(.bottom, 25)
             
-            DestinationSearchView(textSearch: $textSearch, show: $showClearButton)
+            DestinationSearchView(searchTitle: $searchTitle, dismiss: $dismiss)
             
             Spacer()
         }
@@ -50,5 +49,5 @@ struct SearchAndFilterView: View {
 }
 
 #Preview {
-    SearchAndFilterView(dismiss: .constant(true))
+    SearchAndFilterView(dismiss: .constant(true), searchTitle: .constant("Miami"))
 }
